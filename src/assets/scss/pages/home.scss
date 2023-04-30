@@ -1,0 +1,22 @@
+.hero {
+  background-color: $primary-color;
+  color: $background-color;
+  padding: $padding-large;
+  text-align: center;
+
+  h1 {
+    font-size: 4rem;
+    margin-bottom: $margin-large;
+  }
+
+  p {
+    font-size: 1.5rem;
+    margin-bottom: $margin-large;
+  }
+
+  .button {
+    font-size: 1.2rem;
+    padding: $padding-medium $padding-large;
+    border-radius: $border-radius;
+  }
+}

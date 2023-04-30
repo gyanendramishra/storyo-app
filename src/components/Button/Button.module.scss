@@ -1,0 +1,38 @@
+@use "../../assets/scss/variables" as *;
+@use "../../assets/scss/mixins" as *;
+
+/* Buttons */
+.button-primary {
+  @include button-style($color-queen, $color-white, $color-queen);
+}
+
+.button-secondary {
+  @include button-style($color-white, $color-black, $color-queen);
+  &:hover {
+    background-color: $color-queen;
+    color: $color-white;
+  }
+}
+.button-primary,
+.button-secondary {
+  &.button-small {
+    @include font-size($font-medium);
+    height: 30px;
+    width: 100px;
+  }
+  &.button-medium {
+    @include font-size($font-medium);
+    height: 35px;
+    width: 120px;
+  }
+  &.button-large {
+    @include font-size($font-medium);
+    height: 40px;
+    width: 150px;
+  }
+  &.button-full {
+    @include font-size($font-medium);
+    height: 40px;
+    width: 100%;
+  }
+}

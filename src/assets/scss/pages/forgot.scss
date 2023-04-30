@@ -1,0 +1,26 @@
+.forgot-form {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: $padding-medium;
+  border: 1px solid $background-color;
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: $margin-medium;
+  }
+
+  input[type="email"] {
+    display: block;
+    width: 100%;
+    padding: $padding-small;
+    margin-bottom: $margin-medium;
+    border: none;
+    border-radius: $border-radius;
+    background-color: $background-color;
+    color: $font-color;
+  }
+
+  button[type="submit"] {
+    display: block;
+  }
+}

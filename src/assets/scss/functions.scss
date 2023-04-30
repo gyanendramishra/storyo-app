@@ -1,0 +1,20 @@
+@function contrast-ratio($color-1, $color-2) {
+  $l1: relative-luminance($color-1);
+  $l2: relative-luminance($color-2);
+
+  @if $l1 > $l2 {
+    @return (($l1 + 0.05) / ($l2 + 0.05));
+  } @else {
+    @return (($l2 + 0.05) / ($l1 + 0.05));
+  }
+}
+
+@function relative-luminance($color) {
+  $r: red($color) / 255;
+  $g: green($color) / 255;
+  $b: blue($color) / 255;
+
+  $rl: (0.2126 * $r) + (0.7152 * $g) + (0.0722 * $b);
+
+  @return $rl;
+}

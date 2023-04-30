@@ -1,0 +1,59 @@
+@use "variables" as *;
+
+@mixin media-query($size) {
+  @media (min-width: $size) {
+    @content;
+  }
+}
+
+// Responsive font size
+@mixin font-size($size) {
+  font-size: $size;
+  @media (min-width: $breakpoint-md) {
+    font-size: $size * 1.1;
+  }
+  @media (min-width: $breakpoint-xl) {
+    font-size: $size * 1.2;
+  }
+}
+
+// Define mixin for button styles
+@mixin button-style($background-color, $color, $border-color) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $background-color;
+  color: $color;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  font-weight: 400;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: darken($background-color, 10%);
+  }
+}
+
+// Centering
+@mixin center() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Responsive centering
+@mixin center-responsive() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media (min-width: $breakpoint-sm) {
+    justify-content: flex-start;
+  }
+}
+
+// Box shadow
+@mixin box-shadow($x: 0, $y: 0, $blur: 4px, $color: rgba(0, 0, 0, 0.2)) {
+  box-shadow: $x $y $blur $color;
+}

@@ -1,0 +1,38 @@
+@use "../../assets/scss/variables" as *;
+
+footer {
+  background: $color-gray;
+  //   height: auto;
+  //   display: flex;
+  //   flex-direction: row;
+  display: grid;
+  grid-template-columns: 284px 2fr;
+  align-items: center;
+  padding: 48px 2.5vw;
+  grid-gap: 48px;
+  .socal-icons {
+    .icon {
+      position: relative;
+    }
+  }
+  .nav {
+    // display: flex;
+    width: 100%;
+    // gap: 64px;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+
+    a {
+      color: $color-dimly-black;
+      font-weight: 400;
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 0.25s ease-in-out;
+      font-weight: 400;
+      margin-left: 1rem;
+      span: {
+        color: inherit;
+      }
+    }
+  }
+}

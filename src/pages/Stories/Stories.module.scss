@@ -1,0 +1,65 @@
+@use "../../assets/scss/variables" as *;
+
+.stories {
+  display: flex;
+  flex: 1 1 auto;
+
+  justify-content: space-between;
+
+  .left-panel {
+    max-width: 728px;
+    min-width: 728px;
+    padding: 30px 0px;
+    // padding: $content-inner-padding;
+    .categories {
+      display: flex;
+      border-bottom: 1px solid #eee;
+      box-sizing: inherit;
+      //   overflow-y: hidden;
+      //   overflow-x: scroll;
+      //   max-width: max-content;
+
+      ul {
+        display: inherit;
+        // flex-direction: row;
+        list-style: none;
+        // justify-content: space-between;
+        //align-items: flex-start;
+
+        li {
+          margin-right: 20px;
+          padding: 12px 0px;
+          a {
+            text-decoration: none;
+            color: $color-dimly-black;
+            font-size: $font-medium;
+
+            &:hover {
+              color: $color-black;
+            }
+          }
+          &.active {
+            border-bottom: 1px solid #000;
+          }
+        }
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+
+    .story-items {
+      padding: 20px 0px;
+      .story {
+        p {
+          font-size: $font-medium;
+        }
+      }
+    }
+  }
+  .right-panel {
+    min-width: 368px;
+    border-left: 1px solid #eee;
+    padding: 30px 0px 30px 20px;
+  }
+}

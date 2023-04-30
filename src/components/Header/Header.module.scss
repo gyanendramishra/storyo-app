@@ -1,0 +1,20 @@
+@use "../../assets/scss/variables" as *;
+
+.header {
+  background-color: $color-white;
+  box-shadow: $box-shadow;
+  height: 60px;
+  a {
+    width: 56px;
+    font-size: $font-logo;
+    font-weight: 900;
+    text-decoration: none;
+    span:nth-child(1),
+    span:nth-child(3) {
+      color: $color-orange;
+    }
+    span:nth-child(2) {
+      color: $color-purple;
+    }
+  }
+}

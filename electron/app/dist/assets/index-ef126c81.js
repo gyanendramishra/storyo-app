@@ -1,0 +1,1 @@
+import{l as o,_ as r}from"./index-50683e59.js";const t=o(()=>r(()=>import("./Typography-0914bad8.js"),["./Typography-0914bad8.js","./index-50683e59.js","./index-81c6c647.css"],import.meta.url));export{t as T};

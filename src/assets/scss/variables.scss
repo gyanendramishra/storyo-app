@@ -1,0 +1,59 @@
+$color-white: #ffffff;
+$color-black: #333333;
+$color-dimly-black: #3d3d3d;
+$color-queen: #ff1d58;
+$color-pink: #f75990;
+$color-ocean: #00ddff;
+$color-blue: #0096c7;
+$color-dimly-blue: #e8f9fd;
+$color-purple: #8a2be2;
+$color-orange: #ff1e00;
+$olor-dimly-orange: #ff9800;
+$color-yellow: #ffd700;
+$color-dimly-yellow: #fff685;
+$color-green: #59ce8f;
+$color-gray: #eeeeee;
+
+$primary-theme-color: $color-blue;
+$secondary-theme-color: $color-gray;
+$accent-theme-color: $color-dimly-blue;
+
+$primary-color: #ff1d58;
+$secondary-color: #00ddff;
+$background-color: $color-white;
+$tertiary-color: $color-green;
+$font-color: $color-black;
+
+$font-family: Arial, sans-serif;
+$font-size: 16px;
+
+$padding-small: 10px;
+$padding-medium: 20px;
+$padding-large: 30px;
+$margin-small: 10px;
+$margin-medium: 20px;
+$margin-large: 30px;
+
+$font-small: 11px;
+$font-medium: 14px;
+$font-large: 16px;
+$font-logo: 18px;
+
+$border-radius: 5px;
+$box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
+$body-font-family: Arial, sans-serif;
+$heading-font-family: Georgia, serif;
+$content-inner-padding: 15px;
+$content-outer-padding: 50px;
+
+// Spacing
+$base-spacing-unit: 1rem;
+
+$button-small-size: 30px;
+$button-medium-size: 40px;
+$button-large-size: 50px;
+
+$breakpoint-sm: 480px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;

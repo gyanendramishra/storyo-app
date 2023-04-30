@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">gcm-pwa</string>
+    <string name="title_activity_main">gcm-pwa</string>
+    <string name="package_name">com.gcm.app</string>
+    <string name="custom_url_scheme">com.gcm.app</string>
+</resources>
