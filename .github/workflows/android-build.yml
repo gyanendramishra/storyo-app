@@ -1,0 +1,92 @@
+# This is a basic workflow that is manually triggered
+
+name: Android Build
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    name: Android Build
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Version strategy matrix
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Cache dependencies
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+
+      # Migrate/Setup node version
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      # Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Run tests
+      # - name: Run the tests
+      #   run: npm run test
+
+      # Build app
+      - name: Build app
+        run: CI=false npm run build
+
+      # Sync capacitor
+      - name: Sync capacitor
+        run: npx cap sync
+
+      # Setup Java
+      - name: Setup java
+        uses: actions/setup-java@v1
+        with:
+          distribution: "zulu"
+          java-version: "11"
+
+      # Setup gradle
+      # - name: Setup Gradle
+      #   uses: gradle/gradle-build-action@v2
+
+      # Build app bundle
+      - name: Build app bundle
+        run: cd android && ./gradle bundle
+
+      # Extract android signing key from env
+      # - name: Extract Android signing key from env
+      #   run: |
+      #     echo "${{ secrets.RELEASE_KEYSTORE }}" > android/release.jks.base64
+      #     base64 -d android/release.jks.base64 > android/release.decrypted.jks
+
+      # # Sign dev build
+      # - name: Sign dev build
+      #   run: jarsigner -keystore android/release.decrypted.jks -storepass "${{ secrets.RELEASE_KEYSTORE_PASSWORD }}" -signedjar ./android/app/build/outputs/bundle/release/app-release-signed.aab ./android/app/build/outputs/bundle/release/app-release.aab "${{ secrets.RELEASE_KEY_ALIAS }}"
+
+      # # Upload release bundle
+      # - name: Upload release bundle
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: app-release
+      #     path: android/app/build/outputs/bundle/release/app-release-signed.aab
+      #     retention-days: 60

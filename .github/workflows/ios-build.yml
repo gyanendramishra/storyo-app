@@ -1,0 +1,103 @@
+# This is a basic workflow that is manually triggered
+
+name: iOS Build
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    name: iOS Build
+    # The type of runner that the job will run on
+    runs-on: macos-latest
+
+    # Version strategy matrix
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Cache dependencies
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+
+      # Migrate/Setup node version
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      # Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Run tests
+      # - name: Run the tests
+      #   run: npm run test
+
+      # Build app
+      - name: Build app
+        run: CI=false npm run build
+
+      # Sync capacitor
+      - name: Sync capacitor
+        run: npx cap sync
+
+      # Setup ruby bundle
+      - name: Setup ruby (bundle)
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.6
+          bundler-cache: true
+
+      # Restore pods cache
+      - name: Restore pods cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ios/Pods
+            ~/Library/Caches/CocoaPods
+            ~/.cocoapods
+          key: ${{ runner.os }}-pods-${{ hashFiles('ios/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-
+
+      # Install Pods
+      - name: Install pods
+        #- run: cd ./ios/App/App/ && pod install && cd ../../../
+        run: cd ./ios/App && pod install && cd ../..
+
+      # Build iOS app
+      # - name: Build iOS app
+      #   uses: yukiarrr/ios-build-action@v1.5.0
+      #   with:
+      #     project-path: ./ios/App/App.xcodeproj
+      #     p12-base64: ${{secrets.IOS_P12_BASE64}}
+      #     mobileprovision-base64: ${{secrets.IOS_BUILD_PROVISION_PROFILE_BASE64}}
+      #     code-signing-identity: "Apple Distribution"
+      #     team-id: ${{secrets.IOS_TEAM_ID}}
+      #     workspace-path: ./ios/App/App.xcworkspace
+
+      # # Upload app to TestFlight
+      # - name: "Upload app to TestFlight"
+      #   uses: apple-actions/upload-testflight-build@v1
+      #   with:
+      #     app-path: "output.ipa"
+      #     issuer-id: ${{ secrets.IOS_APPSTORE_ISSUER_ID }}
+      #     api-key-id: ${{ secrets.IOS_APPSTORE_API_KEY_ID }}
+      #     api-private-key: ${{ secrets.IOS_APPSTORE_API_PRIVATE_KEY }}
